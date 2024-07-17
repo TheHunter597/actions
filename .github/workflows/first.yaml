@@ -1,8 +1,18 @@
 name: first-action
-on: workflow_dispatch
+on: push
 jobs:
-  first:
+  run-test:
     runs-on: ubuntu-latest
     steps:
-      - name: print welcom
-        run: "echo hello from first action"
+      - name: Get the code
+        uses: actions/checkout@v4
+      - name: installs bun
+        run: |
+          sudo apt-get update
+          curl -fsSL https://bun.sh/install | bash
+      - name: Test the project
+        run: |
+          bun run test
+      - name: Run the project
+        run: |
+          bun run start
