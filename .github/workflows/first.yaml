@@ -15,3 +15,17 @@ jobs:
       - name: Run the project
         run: |
           npm run start
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+      - name: Install the project
+        run: |
+          npm install
+      - name: Build the project
+        run: |
+          npm run build
+      - name: Deploy the project
+        run: |
+          npm run docker
