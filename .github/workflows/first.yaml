@@ -6,18 +6,12 @@ jobs:
     steps:
       - name: Get the code
         uses: actions/checkout@v4
-      - name: installs bun
-        run: |
-          sudo apt-get update
-          curl -fsSL https://bun.sh/install | bash
-      - name: refresh the shell
-        run: source /home/runner/.bashrc
       - name: Install the project
         run: |
-          bun install
+          npm install
       - name: Test the project
         run: |
-          bun run test
+          npm run test
       - name: Run the project
         run: |
-          bun run start
+          npm run start
