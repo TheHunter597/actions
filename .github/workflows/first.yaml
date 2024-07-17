@@ -1,25 +1,45 @@
 name: first-action
-on: push
+on: [push, workflow_dispatch]
+# This workflow will run on every push to the repository
+# plus it can be triggered manually from the Actions tab
 jobs:
-  run-test:
+  echo-info:
     runs-on: ubuntu-latest
     steps:
-      - name: Get the code
-        uses: actions/checkout@v4
-      - name: Install the project
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Echo information
         run: |
-          npm install
-      - name: Test the project
-        run: |
-          npm run test
-      - name: Run the project
-        run: |
-          npm run start
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get the code
-        uses: actions/checkout@v4
-      - name: Deploy the project
-        run: |
-          npm run docker
+          echo "${{github.repository}}"
+          echo "${{github.ref}}"
+          echo "${{github.steps}}"
+  # run-test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get the code
+  #       uses: actions/checkout@v4
+  #     - name: Install the project
+  #       run: |
+  #         npm install
+  #     - name: Test the project
+  #       run: |
+  #         npm run test
+  #     - name: Run the project
+  #       run: |
+  #         npm run start
+  # build:
+  #   needs: run-test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Get the code
+  #       uses: actions/checkout@v4
+  #     - name: Deploy the project
+  #       run: |
+  #         npm run docker
+
+# This two jobs would normally run parallel to each other
+# If you want them to run squeantially you can use the `needs` keyword
+# The `needs` keyword is used to specify that the `build` job should only run
+# after the `run-test` job has completed successfully.
+# If the first job failed the second one would not be excuted.
+

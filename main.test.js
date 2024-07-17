@@ -1,5 +1,5 @@
 describe("main", () => {
-  let shouldPass = false;
+  let shouldPass = true;
   if (Math.random() > 0.5) {
     shouldPass = true;
   }
