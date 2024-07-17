@@ -10,6 +10,11 @@ jobs:
         run: |
           sudo apt-get update
           curl -fsSL https://bun.sh/install | bash
+      - name: refresh the shell
+        run: source /home/runner/.bashrc
+      - name: Install the project
+        run: |
+          bun install
       - name: Test the project
         run: |
           bun run test
