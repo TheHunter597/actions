@@ -20,12 +20,6 @@ jobs:
     steps:
       - name: Get the code
         uses: actions/checkout@v4
-      - name: Install the project
-        run: |
-          npm install
-      - name: Build the project
-        run: |
-          npm run build
       - name: Deploy the project
         run: |
           npm run docker
